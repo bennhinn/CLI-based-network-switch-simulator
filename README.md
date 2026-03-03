@@ -21,6 +21,81 @@ A production-quality, terminal-based network switch simulator that mirrors real 
 
 ---
 
+## 🌱 Beginner Primer (If You're Brand New)
+
+If you're completely new to networking, start here first.
+
+➡️ Full step-by-step lesson: **[Beginner CLI Walkthrough](BEGINNER_CLI_WALKTHROUGH.md)**
+
+### 1) What is a switch?
+
+A **network switch** is like a smart traffic director inside a local network (LAN).
+
+- It connects devices like PCs, printers, servers, and Wi-Fi access points.
+- It forwards data only to the correct destination port (not to everyone).
+- This makes communication faster and safer than old shared-hub behavior.
+
+### 2) Which layer does a switch work on?
+
+Most switching happens at **OSI Layer 2 (Data Link layer)**.
+
+- Layer 2 uses **MAC addresses** to decide where frames should go.
+- Some enterprise switches can also do Layer 3 routing, but this simulator focuses mainly on realistic Layer 2 switch behavior first.
+
+### 3) What is an Ethernet frame?
+
+Inside a LAN, devices send data in an **Ethernet frame**.
+
+Core parts of a frame:
+
+- **Destination MAC**: where the frame should go
+- **Source MAC**: who sent it
+- **Type/Length**: what protocol payload follows
+- **Payload**: actual data
+- **FCS**: error-check value
+
+In simple terms: a frame is the "envelope" used for local network delivery.
+
+### 4) What is a MAC address table?
+
+A switch builds a **MAC address table** (also called CAM table) as it sees incoming traffic.
+
+- It learns: `MAC address -> Port`
+- If destination MAC is known, it sends frame only to that port (**unicast forwarding**)
+- If destination MAC is unknown, it sends to multiple ports in the VLAN (**flooding**)
+- Old entries age out after a timer if no traffic is seen
+
+This learning process is the core of how switching works.
+
+### 5) First 5-minute learning flow in this simulator
+
+Run the default lab:
+
+```bash
+python main.py --scenario default_lab
+```
+
+Then try these commands:
+
+```bash
+Switch> enable
+Switch# show interfaces status
+Switch# show mac address-table
+Switch# show vlan brief
+Switch# explain show mac address-table
+```
+
+What to watch for:
+
+- Ports that are up/down
+- Which VLAN a port belongs to
+- Which MAC addresses are learned on which ports
+- How table entries change after traffic/attacks
+
+If you're new, repeat this cycle until the output feels familiar. Then move to VLAN and STP labs.
+
+---
+
 ## ⚡ Quick Start
 
 ```bash

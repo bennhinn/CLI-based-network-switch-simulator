@@ -7,3 +7,4 @@ STATIC_QA_PHASE1_REPORT.md
 # Generated QA/testing helper scripts
 phase2_live_test_runner.py
 phase3_regression_check.py
+node_modules/
